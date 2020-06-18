@@ -1,0 +1,24 @@
+
+$header-color: #481e6f;
+$text-color: #fff;
+
+.um-header {
+  height: 3.2rem;
+  background: $header-color;
+  display: flex;
+  justify-content: space-between;
+  color: $text-color;
+  box-sizing: border-box;
+  padding: 0 1rem;
+}
+
+.user-settings {
+  display: flex;
+  align-items: center;
+}
+
+.um-sub-header {
+  color: $text-color;
+  height: 20px;
+  background: lighten($header-color, 10%);
+}

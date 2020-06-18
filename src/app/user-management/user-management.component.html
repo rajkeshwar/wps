@@ -1,0 +1,104 @@
+
+
+<div class="user-mgmt">
+  <div class="user-table">
+    <h3 class="table-heading">User Management</h3>
+    <p-table [value]="customers">
+      <ng-template pTemplate="caption">
+        <div class="um-paginator">
+          <div class="um-controls">
+            <button pButton type="button" label="Add New User" (click)="toggleUserDialog($event)"></button>
+            <p-checkbox name="groupname" value="val1" label="Show All Users" [(ngModel)]="selectedValues"></p-checkbox>
+            <span class="online">
+              <span class="icon-circle"></span>
+              <span class="online-users">Online Users</span>
+            </span>
+          </div>
+          <div class="um-filter">
+            <i class="pi pi-search" style="margin:4px 4px 0 0"></i>
+            <input type="text" pInputText size="50" placeholder="Global Filter" (input)="dt.filterGlobal($event.target.value, 'contains')" style="width:auto">
+          </div>
+          <span class="um-paginator__page">
+            <p-paginator [rows]="10" [totalRecords]="120" [rowsPerPageOptions]="[10,20,30]"></p-paginator>
+            <span class="um-paginator--label">Records per page</span>
+          </span>
+        </div>
+      </ng-template>
+      <ng-template pTemplate="header">
+        <tr>
+          <th>Id</th>
+          <th>Status</th>
+          <th>User Name</th>
+          <th>Roles</th>
+          <th>Classification</th>
+          <th>Access Rights</th>
+          <th>User Expiry Date</th>
+          <th>Password Expiry Date</th>
+          <th>Service Pin Expiry Date</th>
+          <th>Language</th>
+          <th>Remarks</th>
+        </tr>
+      </ng-template>
+      <ng-template pTemplate="body" let-customer>
+        <tr>
+          <td>{{customer.customerId}}</td>
+          <td>{{customer.status}}</td>
+          <td>{{customer.userName}}</td>
+          <td>{{customer.roles}}</td>
+          <td>{{customer.classification}}</td>
+          <td>{{customer.accessRights}}</td>
+          <td>{{customer.userExpiryDate}}</td>
+          <td>{{customer.passwordExpiryDate}}</td>
+          <td>{{customer.servicePinExpiryDate}}</td>
+          <td>{{customer.language}}</td>
+          <td>{{customer.remarks}}</td>
+        </tr>
+      </ng-template>
+  </p-table>
+
+  </div>
+</div>
+
+
+<p-dialog styleClass="um-dialog" modal="true" [(visible)]="isNewUserDialogVisible">
+  <p-header>
+    Add New User
+  </p-header>
+  <div class="um-dialog__content">
+    <p-tabView>
+      <p-tabPanel header="User Details">
+        <div class="um-form">
+          <div class="um-form__control" *ngFor="let control of formFields">
+            <div class="um-form--field">
+                <label for="firstname1">Username</label>
+                <input id="firstname1" type="text" pInputText> 
+            </div>
+            <div class="um-form--field">
+                <label for="lastname1">Password</label>
+                <input id="lastname1" type="text" pInputText> 
+            </div>
+          </div>
+        </div>
+      </p-tabPanel>
+      <p-tabPanel header="User Roles">
+        <h3>Roles</h3>
+        <p-table [value]="userRoles">
+          <ng-template pTemplate="header">
+            <tr>
+              <th *ngFor="let key of userRoles[0] | objectKeys">{{key|titleCase}}</th>
+            </tr>
+          </ng-template>
+          <ng-template pTemplate="body" let-user>
+            <tr>
+              <td *ngFor="let key of userRoles[0] | objectKeys">{{user[key]}}</td>
+            </tr>
+          </ng-template>
+        </p-table>
+      </p-tabPanel>
+    </p-tabView>
+  </div>
+  <p-footer>
+    <p-button label="Save"></p-button>
+    <p-button label="Cancel"></p-button>
+  </p-footer>
+</p-dialog>
