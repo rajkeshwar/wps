@@ -17,11 +17,15 @@ import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { UserManagementComponent } from './user-management/user-management.component';
 import { CommonPipeModule } from './pipes/common-pipes';
+import { UserDetailsComponent } from './user-details/user-details.component';
+import { UserRolesComponent } from './user-roles/user-roles.component';
 
 @NgModule({
   declarations: [
     AppComponent,
     UserManagementComponent,
+    UserDetailsComponent,
+    UserRolesComponent,
   ],
   imports: [
     BrowserModule,

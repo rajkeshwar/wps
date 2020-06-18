@@ -12,11 +12,7 @@ export class UserManagementComponent implements OnInit {
   customers: any[];
 
     isNewUserDialogVisible = false;
-
-    selectedCustomers: any[];
-
-    representatives: any[];
-    userRoles = [];
+    
 
     statuses: any[];
     tableHeaders = [];
@@ -34,7 +30,6 @@ export class UserManagementComponent implements OnInit {
       this.customers = [];
 
       const userObject = {
-        customerId: 0,
         status: 'active',
         userName: 'Adam Wallen',
         roles: 'User Admin,System Engineer',
@@ -50,21 +45,7 @@ export class UserManagementComponent implements OnInit {
       this.tableHeaders = Object.keys(userObject);
 
       for (let i = 0; i < 10; i++){
-        userObject.customerId = i + 1;
         this.customers.push({...userObject});
-      }
-
-      const userRole = {
-        roleId: 0,
-        userRoles: 'Adele Vance',
-        accessRights: 'Operator, Site Admin',
-        Description: 'Remarks about this will be displayed here',
-      }
-      
-      for (let i = 0; i < 10; i++){
-        userRole.roleId = i + 1;
-        this.userRoles.push({...userRole});
-        this.formFields.push(i + 1);
       }
 
     }
