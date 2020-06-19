@@ -15,9 +15,7 @@ class ObjectKeysPipe implements PipeTransform {
 })
 class TitleCasePipe implements PipeTransform {
   transform(camelCase: string = ''): string {
-    let tranformed = camelCase.replace(/[A-Z]/g, t => ` ${t}`);
-    tranformed = tranformed.charAt(0).toUpperCase() + tranformed.slice(1);
-    return tranformed;
+    return camelCase.replace(/^\w|[A-Z]/g, t => ` ${t.toUpperCase()}`);
   }
 }
 
