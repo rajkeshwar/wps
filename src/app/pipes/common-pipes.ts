@@ -19,16 +19,25 @@ class TitleCasePipe implements PipeTransform {
   }
 }
 
-
+@Pipe({
+  name: 'localeDate'
+})
+class DateFormatPipe implements PipeTransform {
+  transform(date: Date): string {
+    return new Date(date).toLocaleDateString();
+  }
+}
 
 @NgModule({
   declarations: [
     ObjectKeysPipe,
-    TitleCasePipe
+    TitleCasePipe,
+    DateFormatPipe
   ],
   exports: [
     ObjectKeysPipe,
-    TitleCasePipe
+    TitleCasePipe,
+    DateFormatPipe
   ]
 })
 export class CommonPipeModule { }

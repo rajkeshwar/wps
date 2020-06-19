@@ -1,0 +1,15 @@
+
+
+$bg-color-green: #26c526f2;
+$siemens-color: #009999;
+$siemens-border: darken($siemens-color, 3%);
+
+@mixin siemens-btn {
+  background-color: $siemens-color;
+  border: 1px solid $siemens-border;
+  
+  &:hover {
+    background: darken($siemens-color, 5%) !important;
+    border: 1px solid $siemens-border;
+  }
+}

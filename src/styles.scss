@@ -21,3 +21,8 @@ body {
     background: #fff !important;
   }
 }
+
+.um-paginator--dots.ui-paginator {
+  background-color: transparent !important;
+  border: 1px solid transparent !important;
+}

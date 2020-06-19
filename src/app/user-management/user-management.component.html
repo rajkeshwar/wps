@@ -7,7 +7,7 @@
       <ng-template pTemplate="caption">
         <div class="um-paginator">
           <div class="um-controls">
-            <button pButton type="button" label="Add New User" (click)="toggleUserDialog($event)"></button>
+            <button pButton type="button" class="siemens-btn" label="Add New User" (click)="toggleUserDialog($event)"></button>
             <p-checkbox name="groupname" value="val1" label="Show All Users" [(ngModel)]="selectedValues"></p-checkbox>
             <span class="online">
               <span class="icon-circle"></span>
@@ -21,7 +21,7 @@
             <input type="text" pInputText size="50" placeholder="Global Filter">
           </div>
           <span class="um-paginator__page">
-            <p-paginator [rows]="10" [totalRecords]="120" [rowsPerPageOptions]="[10,20,30]"></p-paginator>
+            <p-paginator styleClass="um-paginator--dots" [rows]="10" [totalRecords]="120" [rowsPerPageOptions]="[10,20,30]"></p-paginator>
             <span class="um-paginator--label">Records per page</span>
           </span>
         </div>
@@ -33,7 +33,17 @@
       </ng-template>
       <ng-template pTemplate="body" let-customer>
         <tr>
-          <td *ngFor="let key of customers[0] | objectKeys" [attr.key]="key">{{customer[key]}}</td>
+          <ng-container 
+            *ngFor="let key of customers[0] | objectKeys" 
+            [ngSwitch]="key">
+            <td [attr.key]="key" *ngSwitchCase="'status'">
+              <span [ngClass]="getStatusClass(customer[key])"></span>
+            </td>
+            <td [attr.key]="key" *ngSwitchCase="'userExpiryDate'">{{customer[key] | localeDate}}</td>
+            <td [attr.key]="key" *ngSwitchCase="'passwordExpiryDate'">{{customer[key] | localeDate}}</td>
+            <td [attr.key]="key" *ngSwitchCase="'servicePinExpiryDate'">{{customer[key] | localeDate}}</td>
+            <td [attr.key]="key" *ngSwitchDefault>{{customer[key]}}</td>
+          </ng-container>
         </tr>
       </ng-template>
   </p-table>
@@ -48,17 +58,17 @@
   </p-header>
   <div class="um-dialog__content">
     <p-tabView>
-      <p-tabPanel header="User Details">
+      <p-tabPanel headerStyleClass="siemens-btn" header="User Details">
         <app-user-details></app-user-details>
       </p-tabPanel>
-      <p-tabPanel header="User Roles">
+      <p-tabPanel headerStyleClass="siemens-btn" header="User Roles">
         <h3>Roles</h3>
         <app-user-roles></app-user-roles>
       </p-tabPanel>
     </p-tabView>
   </div>
   <p-footer>
-    <p-button label="Save"></p-button>
-    <p-button label="Cancel"></p-button>
+    <button pButton type="button" class="siemens-btn" label="Save"></button>
+    <button pButton type="button" class="siemens-btn" label="Cancel"></button>
   </p-footer>
 </p-dialog>

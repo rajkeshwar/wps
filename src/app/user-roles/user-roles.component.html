@@ -9,7 +9,7 @@
     <tr>
       <td *ngFor="let key of userRoles[0] | objectKeys" [attr.key]="key">{{user[key]}}</td>
       <td key="action">
-        <button pButton type="button" class="ui-button-success assign" label="Assign"></button>
+        <button pButton type="button" label="Assign"></button>
       </td>
     </tr>
   </ng-template>

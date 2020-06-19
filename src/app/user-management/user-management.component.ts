@@ -1,5 +1,6 @@
 import { Component, OnInit, ViewChild } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
+import { getRandomInt } from '../utils/utils';
 
 
 @Component({
@@ -29,15 +30,18 @@ export class UserManagementComponent implements OnInit {
 
       this.customers = [];
 
+      const statusList = ['ACTIVE', 'IN-PROGRESS', 'COMPLETED'];
+      const languageList = ['English', 'Brazilian', 'German', 'Chinease', 'Japanese'];
+
       const userObject = {
-        status: 'active',
+        status: '',
         userName: 'Adam Wallen',
         roles: 'User Admin,System Engineer',
         classification: 'Service Engineer, Supervisor',
         accessRights: 'Execute Grid Commands, Create Credentials',
-        userExpiryDate: new Date().toLocaleString(),
-        passwordExpiryDate: new Date().toLocaleString(),
-        servicePinExpiryDate: new Date().toLocaleString(),
+        userExpiryDate: new Date(),
+        passwordExpiryDate: new Date(),
+        servicePinExpiryDate: new Date(),
         language: 'English',
         remarks: 'Remarks about this user/roles will be diplaying here'
       };
@@ -45,6 +49,8 @@ export class UserManagementComponent implements OnInit {
       this.tableHeaders = Object.keys(userObject);
 
       for (let i = 0; i < 10; i++){
+        userObject.status = statusList[getRandomInt(3)],
+        userObject.language = languageList[getRandomInt(5)],
         this.customers.push({...userObject});
       }
 
@@ -52,5 +58,9 @@ export class UserManagementComponent implements OnInit {
 
     toggleUserDialog() {
       this.isNewUserDialogVisible = !this.isNewUserDialogVisible;
+    }
+
+    getStatusClass(value) {
+      return `status status--${value.toLowerCase()}`;
     }
 }
